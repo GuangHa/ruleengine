@@ -1,0 +1,8 @@
+version: '3.6'
+
+services:
+  web:
+    environment:
+      - FLOW_CONTEXT=Development/Ddev
+      - FLOW_REWRITEURLS=1
+      - FLOW_HTTP_TRUSTED_PROXIES=*

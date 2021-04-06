@@ -1,0 +1,18 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "guang/ruleengine",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Guang\\RuleEngine\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Guang.RuleEngine"
+        }
+    }
+}

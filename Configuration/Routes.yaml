@@ -1,0 +1,7 @@
+-
+  name: 'Redirect to Main Package'
+  uriPattern: ''
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Standard'
+    '@action':          'index'

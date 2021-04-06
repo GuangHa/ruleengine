@@ -1,0 +1,16 @@
+Neos:
+  Flow:
+    persistence:
+      backendOptions:
+        host:           'db'
+        dbname:         'db'
+        user:           'db'
+        password:       'db'
+      doctrine:
+        sqlLogger: 'Neos\Flow\Persistence\Doctrine\Logging\SqlLogger'
+  SwiftMailer:
+    transport:
+      type: 'Swift_SmtpTransport'
+      options:
+        host: localhost
+        port: 1025

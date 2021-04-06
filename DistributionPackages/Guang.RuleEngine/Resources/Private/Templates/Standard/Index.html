@@ -1,0 +1,40 @@
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <f:section name="Title">Rule-Engine</f:section>
+    <f:form action="index">
+        <div class="row">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Rule</span>
+                <f:form.textarea name="rule" class="form-control" rows="5" value="{rule}" />
+            </div>
+        </div>
+        <f:if condition="{ruleCheckOutput}">
+            <div class="row mb-3">
+                <span>{ruleCheckOutput}</span>
+            </div>
+        </f:if>
+        <div class="row">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Data</span>
+                <f:form.textarea name="data" class="form-control" rows="5" value="{data}" />
+            </div>
+        </div>
+        <f:if condition="{dataCheckOutput}">
+            <div class="row mb-3">
+                <span>{dataCheckOutput}</span>
+            </div>
+        </f:if>
+        <div class="row">
+            <div class="mb-3">
+                <f:form.submit value="APPLY" class="btn btn-outline-secondary" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3">
+                <label for="output" class="form-label">Output</label>
+                <textarea id="output" class="form-control" rows="20" readonly>{output}</textarea>
+            </div>
+        </div>
+    </f:form>
+</f:section>
