@@ -35,7 +35,7 @@ class StandardController extends ActionController
             $ruleCheckOutput = $this->ruleService->checkInput($rule);
             $dataCheckOutput = $this->ruleService->checkInput($data);
             if ($ruleCheckOutput === false && $dataCheckOutput === false) {
-                $output = JWadhams\JsonLogic::apply(json_decode($rule), json_decode($data), true);
+                $output = $this->ruleService->applyRules($rule, $data);
             }
         }
         $this->view->assign('rule', $rule);
@@ -43,5 +43,6 @@ class StandardController extends ActionController
         $this->view->assign('output', json_encode($output, JSON_PRETTY_PRINT));
         $this->view->assign('ruleCheckOutput', $ruleCheckOutput);
         $this->view->assign('dataCheckOutput', $dataCheckOutput);
+        $this->view->assign('runs', $this->ruleService->getRuns());
     }
 }
