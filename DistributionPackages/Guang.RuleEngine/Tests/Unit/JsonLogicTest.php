@@ -13,20 +13,8 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
      */
     public function modifyFunctionWithExistingAttribute()
     {
-        $rule = '{
-                    "modify": [
-                        {"var":""},
-                        "type",
-                        "B"
-                    ]
-                }';
-        $data = '[
-                    {
-                        "id": 1,
-                        "class": "node",
-                        "type": "A"
-                    }
-                ]';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/modifyFunctionWithExistingAttribute.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/modifyFunctionWithExistingAttribute.json');
         $expected = '[{"id":1,"class":"node","type":"B"}]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data));
         self::assertEquals($expected, json_encode($output));
@@ -39,20 +27,8 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
      */
     public function modifyFunctionWithNewAttribute()
     {
-        $rule = '{
-                    "modify": [
-                        {"var":""},
-                        "new",
-                        true
-                    ]
-                }';
-        $data = '[
-                    {
-                        "id": 1,
-                        "class": "node",
-                        "type": "A"
-                    }
-                ]';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/modifyFunctionWithNewAttribute.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/modifyFunctionWithNewAttribute.json');
         $expected = '[{"id":1,"class":"node","type":"A","new":true}]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data));
         self::assertEquals($expected, json_encode($output));
@@ -66,12 +42,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
     public function modifyFunctionWithUnprovidedParams()
     {
         $this->expectException(\ArgumentCountError::class);
-        $rule = '{
-                    "modify": [
-                        {"var":""},
-                        "new"
-                    ]
-                }';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/modifyFunctionWithUnprovidedParams.json');
         $output = JsonLogic::apply(json_decode($rule), '');
     }
 
@@ -82,19 +53,8 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
      */
     public function removeFunctionWithExistingAttribute()
     {
-        $rule = '{
-                    "remove": [
-                        {"var":""},
-                        "type"
-                    ]
-                }';
-        $data = '[
-                    {
-                        "id": 1,
-                        "class": "node",
-                        "type": "A"
-                    }
-                ]';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/removeFunctionWithExistingAttribute.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/removeFunctionWithExistingAttribute.json');
         $expected = '[{"id":1,"class":"node"}]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data));
         self::assertEquals($expected, json_encode($output));
@@ -107,19 +67,8 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
      */
     public function removeFunctionWithNonExistingAttribute()
     {
-        $rule = '{
-                    "remove": [
-                        {"var":""},
-                        "new"
-                    ]
-                }';
-        $data = '[
-                    {
-                        "id": 1,
-                        "class": "node",
-                        "type": "A"
-                    }
-                ]';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/removeFunctionWithNonExistingAttribute.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/removeFunctionWithNonExistingAttribute.json');
         $expected = '[{"id":1,"class":"node","type":"A"}]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data));
         self::assertEquals($expected, json_encode($output));
@@ -133,11 +82,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
     public function removeFunctionWithUnprovidedParams()
     {
         $this->expectException(\ArgumentCountError::class);
-        $rule = '{
-                    "remove": [
-                        {"var":""}
-                    ]
-                }';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/removeFunctionWithUnprovidedParams.json');
         $output = JsonLogic::apply(json_decode($rule),'');
     }
 
@@ -148,13 +93,8 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
      */
     public function cartesianFunctionWithTwoArrays()
     {
-        $rule = '{
-                    "cartesian": [
-                        {"var":""},
-                        {"var":""}
-                    ]
-                }';
-        $data = '[1,2]';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/cartesianFunctionWithTwoArrays.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/cartesianFunctionWithTwoArrays.json');
         $expected = '[[1,1],[1,2],[2,1],[2,2]]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data));
         self::assertEquals($expected, json_encode($output));
@@ -168,11 +108,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
     public function cartesianFunctionWithUnprovidedParams()
     {
         $this->expectException(\ArgumentCountError::class);
-        $rule = '{
-                    "cartesian": [
-                        {"var":""}
-                    ]
-                }';
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/cartesianFunctionWithUnprovidedParams.json');
         $output = JsonLogic::apply(json_decode($rule), '');
     }
 }
