@@ -3,10 +3,13 @@
 <f:section name="Content">
     <f:section name="Title">Rule-Engine</f:section>
     <f:form action="index">
+        <article>
+            <p id="status">File API & FileReader API not supported</p>
+        </article>
         <div class="row">
             <div class="input-group mb-3">
                 <span class="input-group-text">Rule</span>
-                <f:form.textarea name="rule" class="form-control" rows="5" value="{rule}" />
+                <f:form.textarea name="rule" class="form-control" rows="5" value="{rule}" id="ruleHolder" placeholder="Drag & Drop file or start writing..." />
             </div>
         </div>
         <f:if condition="{ruleCheckOutput}">
@@ -17,7 +20,7 @@
         <div class="row">
             <div class="input-group mb-3">
                 <span class="input-group-text">Data</span>
-                <f:form.textarea name="data" class="form-control" rows="5" value="{data}" />
+                <f:form.textarea name="data" class="form-control" rows="5" value="{data}" id="dataHolder" placeholder="Drag & Drop file or start writing..." />
             </div>
         </div>
         <f:if condition="{dataCheckOutput}">
