@@ -7,6 +7,12 @@ use JWadhams;
 class RuleService {
 
     /**
+     * @Flow\Inject
+     * @var LogService
+     */
+    protected $logService;
+
+    /**
      * @var int
      */
     protected $runCount = 0;
@@ -53,9 +59,11 @@ class RuleService {
     public function applyRules(string $rules, string $data, int $runs = 0)
     {
         $this->runCount++;
+        $this->logService->log('Applying Rules: Run #'.$this->runCount, 'INFO', $data, $rules);
         $output = JWadhams\JsonLogic::apply(json_decode($rules), json_decode($data), true);
 
         if ($this->runCount > self::MAXRECURSIVE) {
+            $this->logService->log("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?", 'WARNING', $data, $rules);
             throw new \Exception("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?");
         }
 
