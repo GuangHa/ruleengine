@@ -35,11 +35,14 @@ class Log {
     protected $message;
 
     /**
+     * @ORM\Column(type="text", length=100000)
      * @var string
      */
     protected $dataInput;
 
     /**
+     *
+     * @ORM\Column(type="text", length=100000)
      * @var string
      */
     protected $ruleInput;

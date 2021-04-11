@@ -1,0 +1,37 @@
+[
+    {
+        "map": [
+            {"var":""},
+            {
+                "if": [
+                    {"==":[{"var":"isVaccinated"},true]},
+                    {"modify":[{"var":""},"citizenship","granted"]},
+                    {"var":""}
+                ]
+            }
+        ]
+    },
+    {
+        "map": [
+            {"var":""},
+            {
+                "if": [
+                    {
+                        "and": [
+                            {"==":[{"var":"type"}, "B"]},
+                            {"==":[{"var":"class"}, "node"]}
+                        ]
+                    },
+                    {
+                        "modify": [
+                            {"var":""},
+                            "isVaccinated",
+                            true
+                        ]
+                    },
+                    {"var":""}
+                ]
+            }
+        ]
+    }
+]

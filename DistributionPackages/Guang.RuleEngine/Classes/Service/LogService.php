@@ -23,4 +23,12 @@ class LogService {
         $log->setLogLevel($logLevel);
         $this->logRepository->add($log);
     }
+
+    /**
+     * @return \Neos\Flow\Persistence\QueryResultInterface
+     */
+    public function getLogs()
+    {
+        return $this->logRepository->findAll();
+    }
 }

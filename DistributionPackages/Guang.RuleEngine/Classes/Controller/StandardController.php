@@ -5,6 +5,7 @@ namespace Guang\RuleEngine\Controller;
  * This file is part of the Guang.RuleEngine package.
  */
 
+use Guang\RuleEngine\Service\LogService;
 use Guang\RuleEngine\Service\RuleService;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
@@ -20,7 +21,14 @@ class StandardController extends ActionController
     protected $ruleService;
 
     /**
+     * @Flow\Inject
+     * @var LogService
+     */
+    protected $logService;
+
+    /**
      * @return void
+     * @throws \Neos\Flow\Mvc\Exception\NoSuchArgumentException
      */
     public function indexAction()
     {
@@ -44,5 +52,10 @@ class StandardController extends ActionController
         $this->view->assign('ruleCheckOutput', $ruleCheckOutput);
         $this->view->assign('dataCheckOutput', $dataCheckOutput);
         $this->view->assign('runs', $this->ruleService->getRuns());
+    }
+
+    public function logAction()
+    {
+        $this->view->assign('logs', $this->logService->getLogs());
     }
 }

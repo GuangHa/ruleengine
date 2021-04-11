@@ -5,3 +5,10 @@
     '@package':         'Guang.RuleEngine'
     '@controller':      'Standard'
     '@action':          'index'
+
+-
+  uriPattern: 'logs'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Standard'
+    '@action':          'log'
