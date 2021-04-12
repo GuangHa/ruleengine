@@ -1,0 +1,1 @@
+[{"id":1,"class":"node","type":"A"},{"id":2,"class":"node","type":"B","isVaccinated":true,"citizenship":"granted"},{"id":3,"class":"node","type":"B","isVaccinated":true,"citizenship":"granted"},{"id":4,"class":"edge","type":"B"}]

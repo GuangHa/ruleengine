@@ -7,6 +7,7 @@
     '@action':          'index'
 
 -
+  name: 'Redirect to logs'
   uriPattern: 'logs'
   defaults:
     '@package':         'Guang.RuleEngine'

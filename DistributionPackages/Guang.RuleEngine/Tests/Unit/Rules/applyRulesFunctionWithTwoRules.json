@@ -1,0 +1,16 @@
+[
+    {
+        "modify": [
+            {"var":""},
+            "class",
+            "tree"
+        ]
+    },
+    {
+        "modify": [
+            {"var":""},
+            "type",
+            "C"
+        ]
+    }
+]
