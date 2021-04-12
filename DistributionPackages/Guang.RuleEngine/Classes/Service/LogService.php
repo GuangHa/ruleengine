@@ -29,6 +29,6 @@ class LogService {
      */
     public function getLogs()
     {
-        return $this->logRepository->findAll();
+        return $this->logRepository->findAllSortByDateDesc();
     }
 }
