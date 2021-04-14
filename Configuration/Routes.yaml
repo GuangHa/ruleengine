@@ -13,3 +13,11 @@
     '@package':         'Guang.RuleEngine'
     '@controller':      'Standard'
     '@action':          'log'
+
+-
+  name: 'Redirect to logs with pages'
+  uriPattern: 'logs/page/{page}'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Standard'
+    '@action':          'log'

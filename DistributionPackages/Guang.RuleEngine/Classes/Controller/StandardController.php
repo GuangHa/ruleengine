@@ -5,6 +5,7 @@ namespace Guang\RuleEngine\Controller;
  * This file is part of the Guang.RuleEngine package.
  */
 
+use Guang\RuleEngine\Domain\Repository\LogRepository;
 use Guang\RuleEngine\Service\LogService;
 use Guang\RuleEngine\Service\RuleService;
 use Neos\Flow\Annotations as Flow;
@@ -13,6 +14,8 @@ use JWadhams;
 
 class StandardController extends ActionController
 {
+
+    const ENTRY_PER_PAGE = 25;
 
     /**
      * @var RuleService
@@ -25,6 +28,12 @@ class StandardController extends ActionController
      * @var LogService
      */
     protected $logService;
+
+    /**
+     * @Flow\Inject
+     * @var LogRepository
+     */
+    protected $logRepository;
 
     /**
      * @return void
@@ -54,8 +63,16 @@ class StandardController extends ActionController
         $this->view->assign('runs', $this->ruleService->getRuns());
     }
 
-    public function logAction()
+    /**
+     * @param int $page
+     */
+    public function logAction(int $page = 1)
     {
-        $this->view->assign('logs', $this->logService->getLogs());
+        $maxPages = (int)($this->logRepository->countAll() / self::ENTRY_PER_PAGE);
+        $pages = range(1, ($maxPages > 0 ? $maxPages : 1));
+        $this->view->assign('currentPage', $page);
+        $this->view->assign('pages', $pages);
+        $this->view->assign('lastPage', count($pages));
+        $this->view->assign('logs', $this->logService->getLogs($page, self::ENTRY_PER_PAGE));
     }
 }

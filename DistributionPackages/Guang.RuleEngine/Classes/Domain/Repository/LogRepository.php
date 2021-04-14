@@ -21,9 +21,11 @@ class LogRepository extends Repository {
     /**
      * @return \Neos\Flow\Persistence\QueryResultInterface
      */
-    public function findAllSortByDateDesc()
+    public function findAllSortByDateDesc(int $offset = 0, int $limit = 10)
     {
         $query = $this->createQuery();
+        $query->setLimit($limit);
+        $query->setOffset($offset);
 
         return $query->execute();
     }

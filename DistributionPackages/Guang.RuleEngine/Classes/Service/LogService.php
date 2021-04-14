@@ -25,10 +25,13 @@ class LogService {
     }
 
     /**
+     * @param int $page
+     * @param int $logPerPage
      * @return \Neos\Flow\Persistence\QueryResultInterface
      */
-    public function getLogs()
+    public function getLogs(int $page = 1, int $logPerPage = 10)
     {
-        return $this->logRepository->findAllSortByDateDesc();
+        $offset = ($page - 1) * $logPerPage;
+        return $this->logRepository->findAllSortByDateDesc($offset, $logPerPage);
     }
 }
