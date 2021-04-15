@@ -61,7 +61,8 @@ class RuleService {
     {
         $this->runCount++;
         $this->logService->log('Applying Rules: Run #'.$this->runCount, ($test ? 'TEST' : 'INFO'), $data, $rules);
-        $output = JWadhams\JsonLogic::apply(json_decode($rules), json_decode($data), true);
+        $recursive = ($this->runCount > 1 ? false : true);
+        $output = JWadhams\JsonLogic::apply(json_decode($rules), json_decode($data), true, $recursive);
 
         if ($this->runCount > self::MAXRECURSIVE) {
             $this->logService->log("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?", ($test ? 'TEST' : 'WARNING'), $data, $rules);
