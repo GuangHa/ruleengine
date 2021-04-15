@@ -15,7 +15,7 @@ use JWadhams;
 class StandardController extends ActionController
 {
 
-    const ENTRY_PER_PAGE = 25;
+    const ENTRY_PER_PAGE = 15;
 
     /**
      * @var RuleService
@@ -68,7 +68,7 @@ class StandardController extends ActionController
      */
     public function logAction(int $page = 1)
     {
-        $maxPages = (int)($this->logRepository->countAll() / self::ENTRY_PER_PAGE);
+        $maxPages = (int)ceil($this->logRepository->countAll() / self::ENTRY_PER_PAGE);
         $pages = range(1, ($maxPages > 0 ? $maxPages : 1));
         $this->view->assign('currentPage', $page);
         $this->view->assign('pages', $pages);
