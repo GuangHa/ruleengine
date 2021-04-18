@@ -22,6 +22,11 @@ class RuleService {
      */
     protected $lastOutput = '';
 
+    /**
+     * @var string
+     */
+    protected $originalData = '';
+
     const MAXRECURSIVE = 100;
 
     public function checkInput(string $input) {
@@ -60,18 +65,31 @@ class RuleService {
     public function applyRules(string $rules, string $data, bool $test = false, int $runs = 0)
     {
         $this->runCount++;
+        if ($this->runCount == 1) {
+            $this->originalData = $data;
+        }
         $this->logService->log('Applying Rules: Run #'.$this->runCount, ($test ? 'TEST' : 'INFO'), $data, $rules);
         $recursive = ($this->runCount > 1 ? false : true);
-        $output = JWadhams\JsonLogic::apply(json_decode($rules), json_decode($data), true, $recursive);
+        $output = JWadhams\JsonLogic::apply(json_decode($rules), json_decode($data), true, $recursive, json_decode($this->originalData));
 
         if ($this->runCount > self::MAXRECURSIVE) {
             $this->logService->log("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?", ($test ? 'TEST' : 'WARNING'), $data, $rules);
             throw new \Exception("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?");
         }
 
-        if ($this->runCount < $runs || $runs == 0) {
+        $singleRule = false;
+        if (is_array(json_decode($rules)) && count(json_decode($rules)) == 1) {
+            $singleRule = true;
+        }
+
+        if (($this->runCount < $runs || $runs == 0) && !$singleRule) {
             if ($this->lastOutput != $output) {
                 $this->lastOutput = $output;
+//                echo '<pre>'.var_export($this->lastOutput, true).'</pre>';
+//                echo '<pre>'.var_export($output, true).'</pre>';
+//                echo '<pre>'.var_export(json_encode($output), true).'</pre>';
+//                echo '<pre>'.var_export($this->runCount, true).'</pre>';
+//                echo '-----------------------------------------------';
                 $output = $this->applyRules($rules, json_encode($output), $test, $runs);
             }
         }
