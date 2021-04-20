@@ -12,11 +12,13 @@
                 </f:link.action>
             </li>
             <f:for each="{pages}" as="page" iteration="iterator">
-                <li class="page-item {f:if(condition: '{currentPage} == {iterator.index + 1}', then: 'active')}">
-                    <f:link.action action="log" additionalParams="{page: '{iterator.index + 1}'}" additionalAttributes="{class: 'page-link'}">
-                        {page}
-                    </f:link.action>
-                </li>
+                <f:if condition="({iterator.index + 1} < {currentPage} && {iterator.index + 1} > {currentPage - 3}) || ({iterator.index + 1} < {currentPage + 3} && {iterator.index + 1} > {currentPage}) || {iterator.index + 1} == {currentPage})">
+                    <li class="page-item {f:if(condition: '{currentPage} == {iterator.index + 1}', then: 'active')}">
+                        <f:link.action action="log" additionalParams="{page: '{iterator.index + 1}'}" additionalAttributes="{class: 'page-link'}">
+                            {page}
+                        </f:link.action>
+                    </li>
+                </f:if>
             </f:for>
             <li class="page-item {f:if(condition: '{currentPage} == {lastPage}', then: 'disabled')}">
                 <f:link.action action="log" additionalParams="{page: '{currentPage + 1}'}" additionalAttributes="{class: 'page-link'}">
