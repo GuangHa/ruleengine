@@ -1,0 +1,38 @@
+[
+    {
+        "join": [
+            {
+                "group": [
+                    {
+                        "filter":[
+                            {"var":["", null, true]},
+                            {
+                                "==":[
+                                    {"var":"type"},
+                                    "A"
+                                ]
+                            }
+                        ]
+                    },
+                    "Group A"
+                ]
+            },
+            {
+                "group": [
+                    {
+                        "filter":[
+                            {"var":["", null, true]},
+                            {
+                                "==":[
+                                    {"var":"type"},
+                                    "B"
+                                ]
+                            }
+                        ]
+                    },
+                    "Group B"
+                ]
+            }
+        ]
+    }
+]
