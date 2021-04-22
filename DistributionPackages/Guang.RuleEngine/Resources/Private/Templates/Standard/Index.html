@@ -31,6 +31,12 @@
         </f:if>
         <div class="row">
             <div class="mb-3">
+                <div class="form-check">
+                    <f:form.checkbox value="true" id="singleRun" name="singleRun" class="form-check-input" />
+                    <label class="form-check-label" for="singleRun">
+                        Nicht rekursiv anwenden
+                    </label>
+                </div>
                 <f:form.submit value="APPLY" class="btn btn-outline-secondary" />
             </div>
         </div>

@@ -49,10 +49,11 @@ class StandardController extends ActionController
         if ($this->request->hasArgument('rule') && $this->request->hasArgument('data')) {
             $rule = $this->request->getArgument('rule');
             $data = $this->request->getArgument('data');
+            $singleRun = ($this->request->getArgument('singleRun') !== '');
             $ruleCheckOutput = $this->ruleService->checkInput($rule);
             $dataCheckOutput = $this->ruleService->checkInput($data);
             if ($ruleCheckOutput === false && $dataCheckOutput === false) {
-                $output = $this->ruleService->applyRules($rule, $data);
+                $output = $this->ruleService->applyRules($rule, $data, false, 0, $singleRun);
             }
         }
         $this->view->assign('rule', $rule);

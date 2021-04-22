@@ -59,10 +59,11 @@ class RuleService {
      * @param string $data
      * @param bool $test
      * @param int $runs max times the rules should be applied
+     * @param bool $singleRun
      * @return array|array[]|\array[][]|bool[]|\bool[][]|false[]|\false[][]|mixed|null[]|\null[][]|string[]|\string[][]
      * @throws \Exception
      */
-    public function applyRules(string $rules, string $data, bool $test = false, int $runs = 0)
+    public function applyRules(string $rules, string $data, bool $test = false, int $runs = 0, bool $singleRun = false)
     {
         $this->runCount++;
         if ($this->runCount == 1) {
@@ -77,12 +78,11 @@ class RuleService {
             throw new \Exception("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?");
         }
 
-        $singleRule = false;
         if (is_array(json_decode($rules)) && count(json_decode($rules)) == 1) {
-            $singleRule = true;
+            $singleRun = true;
         }
 
-        if (($this->runCount < $runs || $runs == 0) && !$singleRule) {
+        if (($this->runCount < $runs || $runs == 0) && !$singleRun) {
             if ($this->lastOutput != $output) {
                 $this->lastOutput = $output;
 //                echo '<pre>'.var_export($this->lastOutput, true).'</pre>';
