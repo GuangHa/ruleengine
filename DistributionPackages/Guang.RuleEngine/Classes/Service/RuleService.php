@@ -27,6 +27,11 @@ class RuleService {
      */
     protected $originalData = '';
 
+    /**
+     * @var int
+     */
+    protected $maxRecursive = 100;
+
     const MAXRECURSIVE = 100;
 
     public function checkInput(string $input) {
@@ -59,7 +64,7 @@ class RuleService {
      * @param string $data
      * @param bool $test
      * @param int $runs max times the rules should be applied
-     * @param bool $singleRun
+     * @param bool $recursiveRun
      * @return array|array[]|\array[][]|bool[]|\bool[][]|false[]|\false[][]|mixed|null[]|\null[][]|string[]|\string[][]
      * @throws \Exception
      */
@@ -73,9 +78,9 @@ class RuleService {
         $recursive = ($this->runCount > 1 ? false : true);
         $output = JWadhams\JsonLogic::apply(json_decode($rules), json_decode($data), true, $recursive, json_decode($this->originalData));
 
-        if ($this->runCount > self::MAXRECURSIVE) {
-            $this->logService->log("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?", ($test ? 'TEST' : 'WARNING'), $data, $rules);
-            throw new \Exception("More than ".self::MAXRECURSIVE." recursive calls! Are you sure your rules do not contradict each other?");
+        if ($this->runCount > $this->maxRecursive) {
+            $this->logService->log("More than ".$this->maxRecursive." recursive calls! Are you sure your rules do not contradict each other?", ($test ? 'TEST' : 'WARNING'), $data, $rules);
+            throw new \Exception("More than ".$this->maxRecursive." recursive calls! Are you sure your rules do not contradict each other?");
         }
 
         if (is_array(json_decode($rules)) && count(json_decode($rules)) == 1) {
@@ -100,6 +105,14 @@ class RuleService {
     public function getRuns()
     {
         return $this->runCount;
+    }
+
+    /**
+     * @param int $max
+     */
+    public function setMaxRecursive(int $max)
+    {
+        $this->maxRecursive = $max;
     }
 
 }

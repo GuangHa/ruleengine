@@ -46,11 +46,18 @@ class StandardController extends ActionController
         $output = '';
         $ruleCheckOutput = '';
         $dataCheckOutput = '';
+
         if ($this->request->hasArgument('recursive')) {
             $recursive = ($this->request->getArgument('recursive') !== '');
         } else {
             $recursive = true;
         }
+
+        if ($this->request->hasArgument('max') && $this->request->getArgument('max') > 0) {
+            $max = $this->request->getArgument('max');
+            $this->ruleService->setMaxRecursive($max);
+        }
+
         if ($this->request->hasArgument('rule') && $this->request->hasArgument('data')) {
             $rule = $this->request->getArgument('rule');
             $data = $this->request->getArgument('data');
