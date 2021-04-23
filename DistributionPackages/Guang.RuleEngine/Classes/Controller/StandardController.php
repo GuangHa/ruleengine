@@ -46,16 +46,21 @@ class StandardController extends ActionController
         $output = '';
         $ruleCheckOutput = '';
         $dataCheckOutput = '';
+        if ($this->request->hasArgument('recursive')) {
+            $recursive = ($this->request->getArgument('recursive') !== '');
+        } else {
+            $recursive = true;
+        }
         if ($this->request->hasArgument('rule') && $this->request->hasArgument('data')) {
             $rule = $this->request->getArgument('rule');
             $data = $this->request->getArgument('data');
-            $singleRun = ($this->request->getArgument('singleRun') !== '');
             $ruleCheckOutput = $this->ruleService->checkInput($rule);
             $dataCheckOutput = $this->ruleService->checkInput($data);
             if ($ruleCheckOutput === false && $dataCheckOutput === false) {
-                $output = $this->ruleService->applyRules($rule, $data, false, 0, $singleRun);
+                $output = $this->ruleService->applyRules($rule, $data, false, 0, $recursive);
             }
         }
+        $this->view->assign('recursive', $recursive);
         $this->view->assign('rule', $rule);
         $this->view->assign('data', $data);
         $this->view->assign('output', json_encode($output, JSON_PRETTY_PRINT));

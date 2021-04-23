@@ -63,7 +63,7 @@ class RuleService {
      * @return array|array[]|\array[][]|bool[]|\bool[][]|false[]|\false[][]|mixed|null[]|\null[][]|string[]|\string[][]
      * @throws \Exception
      */
-    public function applyRules(string $rules, string $data, bool $test = false, int $runs = 0, bool $singleRun = false)
+    public function applyRules(string $rules, string $data, bool $test = false, int $runs = 0, bool $recursiveRun = true)
     {
         $this->runCount++;
         if ($this->runCount == 1) {
@@ -79,10 +79,10 @@ class RuleService {
         }
 
         if (is_array(json_decode($rules)) && count(json_decode($rules)) == 1) {
-            $singleRun = true;
+            $recursiveRun = false;
         }
 
-        if (($this->runCount < $runs || $runs == 0) && !$singleRun) {
+        if (($this->runCount < $runs || $runs == 0) && $recursiveRun) {
             if ($this->lastOutput != $output) {
                 $this->lastOutput = $output;
 //                echo '<pre>'.var_export($this->lastOutput, true).'</pre>';
