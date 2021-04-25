@@ -6,6 +6,7 @@ namespace Guang\RuleEngine\Controller;
  */
 
 use Guang\RuleEngine\Domain\Repository\LogRepository;
+use Guang\RuleEngine\Domain\Repository\RulesetRepository;
 use Guang\RuleEngine\Service\LogService;
 use Guang\RuleEngine\Service\RuleService;
 use Neos\Flow\Annotations as Flow;
@@ -34,6 +35,12 @@ class StandardController extends ActionController
      * @var LogRepository
      */
     protected $logRepository;
+
+    /**
+     * @Flow\Inject
+     * @var RulesetRepository
+     */
+    protected $rulesetRepository;
 
     /**
      * @return void
@@ -74,6 +81,7 @@ class StandardController extends ActionController
         $this->view->assign('ruleCheckOutput', $ruleCheckOutput);
         $this->view->assign('dataCheckOutput', $dataCheckOutput);
         $this->view->assign('runs', $this->ruleService->getRuns());
+        $this->view->assign('rulesets', $this->rulesetRepository->findAll());
     }
 
     /**

@@ -1,0 +1,32 @@
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <f:section name="Title">Create Ruleset</f:section>
+    <f:form action="create" name="ruleset">
+        <div class="row">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend col-2">
+                    <span class="input-group-text col-12">Name</span>
+                </div>
+                <f:form.textfield property="name" class="form-control" required="true"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group mb-3">
+                <span class="input-group-text col-2">Beschreibung</span>
+                <f:form.textarea property="description" class="form-control" required="true" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group mb-3">
+                <span class="input-group-text col-2">Regeln</span>
+                <f:form.textarea property="rules" class="form-control" required="true" />
+            </div>
+        </div>
+
+        <f:form.submit value="Speichern" class="btn btn-primary" />
+        <f:link.action action="index" class="btn btn-outline-secondary">Abbrechen</f:link.action>
+    </f:form>
+</f:section>

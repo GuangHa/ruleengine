@@ -8,8 +8,14 @@
         </article>
         <p><a href="/logs">Logs</a></p>
         <div class="row">
+            <div class="input-group form-group mb-3">
+                <span class="input-group-text col-1">Ruleset</span>
+                <f:form.select id="rulesets" name="ruleset" options="{rulesets}" class="form-control" optionValueField="id" optionLabelField="name" prependOptionLabel="Ruleset auswählen..." prependOptionValue="0" />
+            </div>
+        </div>
+        <div class="row">
             <div class="input-group mb-3">
-                <span class="input-group-text">Rule</span>
+                <span class="input-group-text col-1">Rule</span>
                 <f:form.textarea name="rule" class="form-control" rows="5" value="{rule}" id="ruleHolder" placeholder="Drag & Drop file or start writing..." />
             </div>
         </div>
@@ -20,7 +26,7 @@
         </f:if>
         <div class="row">
             <div class="input-group mb-3">
-                <span class="input-group-text">Data</span>
+                <span class="input-group-text col-1">Data</span>
                 <f:form.textarea name="data" class="form-control" rows="5" value="{data}" id="dataHolder" placeholder="Drag & Drop file or start writing..." />
             </div>
         </div>

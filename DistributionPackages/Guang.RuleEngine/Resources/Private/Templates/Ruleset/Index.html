@@ -1,0 +1,78 @@
+<f:layout name="Default" />
+
+<f:section name="Content">
+    <f:section name="Title">Rules</f:section>
+    <p>{pageCount}</p>
+    <p><a href="/">Home</a></p>
+    <p><f:link.action action="new">Neuer Eintrag</f:link.action></p>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item {f:if(condition: '{currentPage} == 1', then: 'disabled')}">
+                <f:link.action action="log" additionalParams="{page: '{currentPage - 1}'}" additionalAttributes="{class: 'page-link'}">
+                    Previous
+                </f:link.action>
+            </li>
+            <f:for each="{pages}" as="page" iteration="iterator">
+                <f:if condition="({iterator.index + 1} < {currentPage} && {iterator.index + 1} > {currentPage - 3}) || ({iterator.index + 1} < {currentPage + 3} && {iterator.index + 1} > {currentPage}) || {iterator.index + 1} == {currentPage})">
+                    <li class="page-item {f:if(condition: '{currentPage} == {iterator.index + 1}', then: 'active')}">
+                        <f:link.action action="log" additionalParams="{page: '{iterator.index + 1}'}" additionalAttributes="{class: 'page-link'}">
+                            {page}
+                        </f:link.action>
+                    </li>
+                </f:if>
+            </f:for>
+            <li class="page-item {f:if(condition: '{currentPage} == {lastPage}', then: 'disabled')}">
+                <f:link.action action="log" additionalParams="{page: '{currentPage + 1}'}" additionalAttributes="{class: 'page-link'}">
+                    Next
+                </f:link.action>
+            </li>
+        </ul>
+    </nav>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th class="col">ID</th>
+            <th class="col">Datum</th>
+            <th class="col">Name</th>
+            <th class="col">Beschreibung</th>
+            <th class="col">Rules</th>
+            <th class="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <f:for each="{rulesets}" as="ruleset">
+            <tr scope="row">
+                <td>{ruleset.id}</td>
+                <td><f:format.date format="d.m.Y H:i:s">{ruleset.datetime}</f:format.date></td>
+                <td><f:link.action action="edit" arguments="{ruleset:ruleset}">{ruleset.name}</f:link.action></td>
+                <td><f:format.crop maxCharacters="200" append="...">{ruleset.description}</f:format.crop></td>
+                <td><f:format.crop maxCharacters="200" append="...">{ruleset.rules}</f:format.crop></td>
+                <td><f:link.action action="delete" arguments="{ruleset:ruleset}">Löschen</f:link.action></td>
+            </tr>
+        </f:for>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item {f:if(condition: '{currentPage} == 1', then: 'disabled')}">
+                <f:link.action action="log" additionalParams="{page: '{currentPage - 1}'}" additionalAttributes="{class: 'page-link'}">
+                    Previous
+                </f:link.action>
+            </li>
+            <f:for each="{pages}" as="page" iteration="iterator">
+                <f:if condition="({iterator.index + 1} < {currentPage} && {iterator.index + 1} > {currentPage - 3}) || ({iterator.index + 1} < {currentPage + 3} && {iterator.index + 1} > {currentPage}) || {iterator.index + 1} == {currentPage})">
+                    <li class="page-item {f:if(condition: '{currentPage} == {iterator.index + 1}', then: 'active')}">
+                        <f:link.action action="log" additionalParams="{page: '{iterator.index + 1}'}" additionalAttributes="{class: 'page-link'}">
+                            {page}
+                        </f:link.action>
+                    </li>
+                </f:if>
+            </f:for>
+            <li class="page-item {f:if(condition: '{currentPage} == {lastPage}', then: 'disabled')}">
+                <f:link.action action="log" additionalParams="{page: '{currentPage + 1}'}" additionalAttributes="{class: 'page-link'}">
+                    Next
+                </f:link.action>
+            </li>
+        </ul>
+    </nav>
+</f:section>

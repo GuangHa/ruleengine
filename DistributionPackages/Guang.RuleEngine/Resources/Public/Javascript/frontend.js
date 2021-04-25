@@ -2,6 +2,7 @@
 $(document).ready(function() {
     var ruleHolder = document.getElementById('ruleHolder'),
         dataHolder = document.getElementById('dataHolder'),
+        ruleset = document.getElementById('rulesets'),
         state = document.getElementById('status');
 
     if (typeof window.FileReader === 'undefined') {
@@ -57,4 +58,12 @@ $(document).ready(function() {
 
         return false;
     };
+    ruleset.onchange = function(e) {
+        $.ajax({
+            url: '/rules/rule?id='+$(this).val(),
+            success: function(result) {
+                ruleHolder.value = result;
+            }
+        });
+    }
 });

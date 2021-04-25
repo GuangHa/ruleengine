@@ -29,3 +29,27 @@
     '@package':         'Guang.RuleEngine'
     '@controller':      'Api'
     '@action':          'apply'
+
+-
+  name: 'Rulesets'
+  uriPattern: 'rules'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Ruleset'
+    '@action':          'index'
+
+-
+  name: 'Rulesets Actions with Id'
+  uriPattern: 'rules/{@action}/{id}'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Ruleset'
+    '@action':          'edit'
+
+-
+  name: 'Rulesets Actions'
+  uriPattern: 'rules/{@action}'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Ruleset'
+    '@action':          'index'
