@@ -21,3 +21,11 @@
     '@package':         'Guang.RuleEngine'
     '@controller':      'Standard'
     '@action':          'log'
+
+-
+  name: 'Api'
+  uriPattern: 'api/{@action}'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'Api'
+    '@action':          'apply'

@@ -32,8 +32,6 @@ class RuleService {
      */
     protected $maxRecursive = 100;
 
-    const MAXRECURSIVE = 100;
-
     public function checkInput(string $input) {
 
         if ($input == '') {
