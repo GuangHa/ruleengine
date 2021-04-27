@@ -1,0 +1,7 @@
+{
+    "create": [
+        {"var": ""},
+        ["Attribute1", "value1"],
+        ["Attribute2", "value2"]
+    ]
+}
