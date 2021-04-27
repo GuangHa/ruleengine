@@ -241,4 +241,41 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
+
+    /**
+     * @test
+     */
+    public function deleteFunctionNonExisting()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionNonExisting.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionNonExisting.json');
+        $expected = '[{"id":1,"class":"node","type":"A"},{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
+    /**
+     * @test
+     */
+    public function deleteFunctionSingleExisting()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionSingleExisting.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionSingleExisting.json');
+        $expected = '[{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
+    /**
+     * @test
+     */
+    public function deleteFunctionMultipleExisting()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionMultipleExisting.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionMultipleExisting.json');
+        $expected = '[{"id":1,"class":"node","type":"A"}]';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
 }
