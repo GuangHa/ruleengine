@@ -1,0 +1,17 @@
+{
+    "group": [
+        {
+            "filter":[
+                {"var":["", null, true]},
+                {
+                    "==":[
+                        {"var":"type"},
+                        "A"
+                    ]
+                }
+            ]
+        },
+        "Group A",
+        true
+    ]
+}

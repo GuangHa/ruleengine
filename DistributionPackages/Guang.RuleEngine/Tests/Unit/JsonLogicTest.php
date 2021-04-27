@@ -111,4 +111,46 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/cartesianFunctionWithUnprovidedParams.json');
         $output = JsonLogic::apply(json_decode($rule), '');
     }
+
+    /**
+     * Test the function with an object
+     *
+     * @test
+     */
+    public function groupFunctionNormal()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/groupFunctionNormal.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/groupFunctionNormal.json');
+        $expected = '{"Group A":[{"id":1,"class":"node","type":"A"}]}';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
+    /**
+     * Test the function with a filter
+     *
+     * @test
+     */
+    public function groupFunctionWithFilter()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/groupFunctionWithFilter.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/groupFunctionWithFilter.json');
+        $expected = '{"Group A":[{"id":1,"class":"node","type":"A"}]}';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
+    /**
+     * Test the function with list of numbers
+     *
+     * @test
+     */
+    public function groupFunctionWithNumbers()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/groupFunctionNormal.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/groupFunctionWithNumbers.json');
+        $expected = '{"Group A":[1,2]}';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
 }
