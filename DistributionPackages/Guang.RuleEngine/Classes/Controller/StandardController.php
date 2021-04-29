@@ -48,6 +48,9 @@ class StandardController extends ActionController
      */
     public function indexAction()
     {
+        if (version_compare(phpversion(), '7.1', '>=')) {
+            ini_set( 'serialize_precision', -1 );
+        }
         $rule = '';
         $data = '';
         $output = '';
