@@ -15,5 +15,12 @@
             {"group": [{"merge": [{"var": "AHU"},{"create": [[], ["height", {"var": "AHU.0.height"}]]}]}, "AHU"]},
             {"var": ""}
         ]
+    },
+    {
+        "if": [
+            {"missing": [true, {"var":""}, ["DATA"]]},
+            {"join": [{"group": [{"var": ["", null, true]}, "DATA"]}, {"var": ""}]},
+            {"var":""}
+        ]
     }
 ]

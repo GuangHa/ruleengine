@@ -81,7 +81,7 @@ class RuleService {
             throw new \Exception("More than ".$this->maxRecursive." recursive calls! Are you sure your rules do not contradict each other?");
         }
 
-        if (is_array(json_decode($rules)) && count(json_decode($rules)) == 1) {
+        if ((is_array(json_decode($rules)) && count(json_decode($rules)) == 1) || is_object(json_decode($rules))) {
             $recursiveRun = false;
         }
 

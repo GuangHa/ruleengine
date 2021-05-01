@@ -225,7 +225,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
     {
         $rule = file_get_contents(dirname(__FILE__).'/Rules/joinFunctionWithTwoGroups.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/applyRules.json');
-        $expected = '[[{"Group A":[{"id":1,"class":"node","type":"A"}]},{"Group B":[{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]}]]';
+        $expected = '[{"Group A":[{"id":1,"class":"node","type":"A"}],"Group B":[{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]}]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
