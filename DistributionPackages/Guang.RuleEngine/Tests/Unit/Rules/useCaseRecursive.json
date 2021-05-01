@@ -1,0 +1,19 @@
+[
+    {
+        "if": [
+            {"missing": [true, {"var": ""},["AHU"]]},
+            {"group": [{"create": [[], [
+                "height",
+                {"sqrt": [{"/": [{"/": [{"/": [{"+": {"map":[{"var":["", null, true]}, {"var":"room_volume"}]}}, 3600]}, 1]}, 1.5]}, 2]}
+            ]]}, "AHU"]},
+            {"modify": [{"var": ""}, "AHU.height", {"sqrt": [{"/": [{"/": [{"/": [{"+": {"map":[{"var":["", null, true]}, {"var":"room_volume"}]}}, 3600]}, {"count": {"var": "AHU"}}]}, 1.5]}, 2]}]}
+        ]
+    },
+    {
+        "if": [
+            {">": [{"var": "AHU.0.height"},{"var": ["0.room_unbounded_height", null, true]}]},
+            {"group": [{"merge": [{"var": "AHU"},{"create": [[], ["height", {"var": "AHU.0.height"}]]}]}, "AHU"]},
+            {"var": ""}
+        ]
+    }
+]

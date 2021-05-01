@@ -88,11 +88,6 @@ class RuleService {
         if (($this->runCount < $runs || $runs == 0) && $recursiveRun) {
             if ($this->lastOutput != $output) {
                 $this->lastOutput = $output;
-//                echo '<pre>'.var_export($this->lastOutput, true).'</pre>';
-//                echo '<pre>'.var_export($output, true).'</pre>';
-//                echo '<pre>'.var_export(json_encode($output), true).'</pre>';
-//                echo '<pre>'.var_export($this->runCount, true).'</pre>';
-//                echo '-----------------------------------------------';
                 $output = $this->applyRules($rules, json_encode($output), $test, $runs);
             }
         }
