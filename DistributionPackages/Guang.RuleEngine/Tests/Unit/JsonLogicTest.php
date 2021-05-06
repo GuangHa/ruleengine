@@ -6,6 +6,13 @@ use JWadhams\JsonLogic;
 class JsonLogicTest extends \PHPUnit\Framework\TestCase
 {
 
+    protected function setUp(): void
+    {
+        if (version_compare(phpversion(), '7.1', '>=')) {
+            ini_set( 'serialize_precision', -1 );
+        }
+    }
+
     /**
      * Test the value change of an existing attribute
      *
@@ -274,6 +281,18 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionMultipleExisting.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionMultipleExisting.json');
         $expected = '[{"id":1,"class":"node","type":"A"}]';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
+    /**
+     * @test
+     */
+    public function useCaseRecursive()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/useCaseRecursive.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/simpleUseCase.json');
+        $expected = '[{"AHU":[{"height":1.09}]},[{"id":1,"room_volume":6325.337,"room_unbounded_height":3.6},{"id":2,"room_volume":134.185,"room_unbounded_height":3.6}],{"DATA":[{"id":1,"room_volume":6325.337,"room_unbounded_height":3.6},{"id":2,"room_volume":134.185,"room_unbounded_height":3.6}],"0":{"id":1,"room_volume":6325.337,"room_unbounded_height":3.6},"1":{"id":2,"room_volume":134.185,"room_unbounded_height":3.6}}]';
         $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
