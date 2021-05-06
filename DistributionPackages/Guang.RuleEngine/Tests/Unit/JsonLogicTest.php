@@ -122,7 +122,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/groupFunctionNormal.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/groupFunctionNormal.json');
         $expected = '{"Group A":[{"id":1,"class":"node","type":"A"}]}';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -136,7 +136,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/groupFunctionWithFilter.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/groupFunctionWithFilter.json');
         $expected = '{"Group A":[{"id":1,"class":"node","type":"A"}]}';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -150,7 +150,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/groupFunctionNormal.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/groupFunctionWithNumbers.json');
         $expected = '{"Group A":[1,2]}';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -164,7 +164,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/sqrtFunctionNumbers.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/sqrtFunctionNumbers.json');
         $expected = '2';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -178,7 +178,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/sqrtFunctionNumbersFromData.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/sqrtFunctionNumbersFromData.json');
         $expected = '2';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -190,7 +190,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/createFunctionWithEmptyData.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/createFunctionWithEmptyData.json');
         $expected = '[{"Attribute1":"value1","Attribute2":"value2"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -202,7 +202,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/createFunctionWithData.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/createFunctionWithData.json');
         $expected = '[{"id":1,"class":"node","type":"A"},{"Attribute1":"value1","Attribute2":"value2"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -214,7 +214,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/createFunctionWithSameData.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/createFunctionWithSameData.json');
         $expected = '[{"id":1,"class":"node","type":"A"},{"id":1,"class":"node","type":"A"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -226,7 +226,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/joinFunctionWithTwoGroups.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/applyRules.json');
         $expected = '[{"Group A":[{"id":1,"class":"node","type":"A"}],"Group B":[{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -238,7 +238,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/joinFunctionWithTwoData.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/joinFunctionWithTwoData.json');
         $expected = '[{"id":1,"class":"node","type":"A"},{"id":1,"class":"node","type":"A"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -250,7 +250,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionNonExisting.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionNonExisting.json');
         $expected = '[{"id":1,"class":"node","type":"A"},{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -262,7 +262,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionSingleExisting.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionSingleExisting.json');
         $expected = '[{"id":2,"class":"node","type":"B"},{"id":3,"class":"node","type":"B"},{"id":4,"class":"edge","type":"B"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
@@ -274,7 +274,7 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         $rule = file_get_contents(dirname(__FILE__).'/Rules/deleteFunctionMultipleExisting.json');
         $data = file_get_contents(dirname(__FILE__).'/Data/deleteFunctionMultipleExisting.json');
         $expected = '[{"id":1,"class":"node","type":"A"}]';
-        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, true, json_decode($data));
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
         self::assertEquals($expected, json_encode($output));
     }
 
