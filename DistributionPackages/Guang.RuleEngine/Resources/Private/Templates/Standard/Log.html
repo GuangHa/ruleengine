@@ -1,9 +1,12 @@
 <f:layout name="Default" />
 
+<f:section name="navigation-logs">active</f:section>
+<f:section name="navigation-home"></f:section>
+<f:section name="navigation-rulesets"></f:section>
+
 <f:section name="Content">
     <f:section name="Title">Logs</f:section>
     <p>{pageCount}</p>
-    <p><a href="/">Home</a></p>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item {f:if(condition: '{currentPage} == 1', then: 'disabled')}">

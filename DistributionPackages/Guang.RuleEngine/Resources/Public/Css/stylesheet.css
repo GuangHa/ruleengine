@@ -3,3 +3,10 @@
 
 #dataHolder { border: 3px dashed #ccc;}
 #dataHolder.hover { border: 3px dashed #333; }
+
+body {
+    padding-top: 70px;
+}
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
