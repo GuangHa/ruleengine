@@ -297,4 +297,16 @@ class JsonLogicTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expected, json_encode($output));
     }
 
+    /**
+     * @test
+     */
+    public function useCaseWithAllocation()
+    {
+        $rule = file_get_contents(dirname(__FILE__).'/Rules/useCaseWithAllocation.json');
+        $data = file_get_contents(dirname(__FILE__).'/Data/useCaseWithAllocation.json');
+        $expected = '[{"AHU":[{"id":0,"height":1.09}]},[{"id":1,"room_volume":6325.337,"room_unbounded_height":3.6},{"id":2,"room_volume":134.185,"room_unbounded_height":3.6}],{"AHU":[]},{"DATA":[{"id":1,"room_volume":6325.337,"room_unbounded_height":3.6},{"id":2,"room_volume":134.185,"room_unbounded_height":3.6}],"0":{"id":1,"room_volume":6325.337,"room_unbounded_height":3.6},"1":{"id":2,"room_volume":134.185,"room_unbounded_height":3.6}}]';
+        $output = JsonLogic::apply(json_decode($rule), json_decode($data), false, json_decode($data));
+        self::assertEquals($expected, json_encode($output));
+    }
+
 }
