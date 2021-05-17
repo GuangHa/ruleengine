@@ -145,18 +145,18 @@ Create a cartesian product out of two sources.
 ### Data
 ``` 
 [
-	{"id": 1},
-	{"id": 2}
+    {"id": 1},
+    {"id": 2}
 ]
  ```
 
 ### Rule
 ``` 
 {
-	"cartesian": [
-		{"var":""},
-		{"var":""}
-	]
+    "cartesian": [
+        {"var":""},
+        {"var":""}
+    ]
 }
 ```
 
@@ -191,22 +191,22 @@ Parameter 3: attribute value
 ### Data
 ```
 [
-	{
-		"id": 1,
-		"class": "node",
-		"type": "A"
-	}
+    {
+        "id": 1,
+        "class": "node",
+        "type": "A"
+    }
 ]
 ```
 
 ### Rule
 ```
 {
-	"modify": [
-		{"var":""}, 
-		"type", 
-		"B"
-	]
+    "modify": [
+        {"var":""}, 
+        "type", 
+        "B"
+    ]
 }
 ```
 
@@ -229,21 +229,21 @@ Parameter 2: attribute key
 ### Data
 ```
 [
-	{
-		"id": 1,
-		"class": "node",
-		"type": "A"
-	}
+    {
+        "id": 1,
+        "class": "node",
+        "type": "A"
+    }
 ]
 ```
 
 ### Rule
 ```
 {
-	"remove": [
-		{"var":""}, 
-		"type"
-	]
+    "remove": [
+        {"var":""}, 
+        "type"
+    ]
 }
 ```
 

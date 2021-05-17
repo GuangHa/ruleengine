@@ -1,4 +1,6 @@
 [
+    "Regel führt nicht zu einer Endlosschleife, da die Rule-Engine den letzten Output mit dem aktuellen Output vergleicht.",
+    "Da der Output NACH BEIDEN Regeln gleich ist, gibts keine Endlosschleife",
     {
         "if": [
             {"==":[{"var":"type"},"A"]},
