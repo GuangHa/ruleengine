@@ -18,7 +18,6 @@ class MongoDBService {
      */
     public function setConnection($user, $password, $server)
     {
-//        $this->client = new Client('mongodb+srv://ruleengine:ruleengine123@cluster0.ym0k9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
         setcookie('mongodbuser', $user);
         setcookie('mongodbpassword', $password);
         setcookie('mongodbserver', $server);
