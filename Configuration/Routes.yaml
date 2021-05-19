@@ -53,3 +53,17 @@
     '@package':         'Guang.RuleEngine'
     '@controller':      'Ruleset'
     '@action':          'index'
+-
+  name: 'MongoDB Connect'
+  uriPattern: 'mongodb'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'MongoDB'
+    '@action':          'index'
+-
+  name: 'MongoDB Actions'
+  uriPattern: 'mongodb/{@action}'
+  defaults:
+    '@package':         'Guang.RuleEngine'
+    '@controller':      'MongoDB'
+    '@action':          'index'

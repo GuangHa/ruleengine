@@ -16,6 +16,9 @@ If you followed these steps, you should be able to access the site via http://ru
 
 For setting up a webserver, please contact your administrator. The following content are here to help.
 
+### Install mongodb
+* Install mongodb on your server; lookup https://docs.mongodb.com/drivers/php/
+
 ### Install packages
 * Don't forget to install the needed packages first: ``` composer install ```
 

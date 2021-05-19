@@ -18,7 +18,8 @@
     "require": {
         "neos/flow": "~7.0.0",
         "guang/ruleengine": "@dev",
-        "jwadhams/json-logic-php": "^1.4"
+        "jwadhams/json-logic-php": "^1.4",
+        "mongodb/mongodb": "^1.8"
     },
     "require-dev": {
         "neos/kickstarter": "~7.0.0",

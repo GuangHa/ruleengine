@@ -3,6 +3,7 @@ $(document).ready(function() {
     var ruleHolder = document.getElementById('ruleHolder'),
         dataHolder = document.getElementById('dataHolder'),
         ruleset = document.getElementById('rulesets'),
+        collectionname = document.getElementById('collectionname'),
         state = document.getElementById('status');
 
     if (typeof window.FileReader === 'undefined') {
@@ -65,5 +66,13 @@ $(document).ready(function() {
                 ruleHolder.value = result;
             }
         });
-    }
+    };
+    collectionname.onchange = function(e) {
+        $.ajax({
+            url: '/mongodb/data?collection='+$(this).val(),
+            success: function(result) {
+                dataHolder.value = result;
+            }
+        })
+    };
 });

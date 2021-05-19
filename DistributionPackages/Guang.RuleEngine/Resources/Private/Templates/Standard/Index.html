@@ -3,6 +3,7 @@
 <f:section name="navigation-logs"></f:section>
 <f:section name="navigation-home">active</f:section>
 <f:section name="navigation-rulesets"></f:section>
+<f:section name="navigation-mongodb"></f:section>
 
 <f:section name="Content">
     <f:section name="Title">Rule-Engine</f:section>
@@ -25,6 +26,14 @@
         <f:if condition="{ruleCheckOutput}">
             <div class="row mb-3">
                 <span>{ruleCheckOutput}</span>
+            </div>
+        </f:if>
+        <f:if condition="{collectionNames}">
+            <div class="row">
+                <div class="input-group form-group mb-3">
+                    <span class="input-group-text col-1">Collection</span>
+                    <f:form.select id="collectionname" name="collectionname" options="{collectionNames}" class="form-control" prependOptionLabel="Collection auswählen..." prependOptionValue="" />
+                </div>
             </div>
         </f:if>
         <div class="row">

@@ -8,6 +8,7 @@ namespace Guang\RuleEngine\Controller;
 use Guang\RuleEngine\Domain\Repository\LogRepository;
 use Guang\RuleEngine\Domain\Repository\RulesetRepository;
 use Guang\RuleEngine\Service\LogService;
+use Guang\RuleEngine\Service\MongoDBService;
 use Guang\RuleEngine\Service\RuleService;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
@@ -43,6 +44,12 @@ class StandardController extends ActionController
     protected $rulesetRepository;
 
     /**
+     * @var MongoDBService
+     * @Flow\Inject
+     */
+    protected $mongoDBService;
+
+    /**
      * @return void
      * @throws \Neos\Flow\Mvc\Exception\NoSuchArgumentException
      */
@@ -76,6 +83,9 @@ class StandardController extends ActionController
             if ($ruleCheckOutput === false && $dataCheckOutput === false) {
                 $output = $this->ruleService->applyRules($rule, $data, false, 0, $recursive);
             }
+        }
+        if ($this->mongoDBService->hasDatabaseChoosen()) {
+            $this->view->assign('collectionNames', $this->mongoDBService->getCollections());
         }
         $this->view->assign('recursive', $recursive);
         $this->view->assign('rule', $rule);

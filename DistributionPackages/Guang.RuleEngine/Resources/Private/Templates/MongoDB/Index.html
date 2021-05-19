@@ -1,0 +1,69 @@
+<f:layout name="Default" />
+
+<f:section name="navigation-logs"></f:section>
+<f:section name="navigation-home"></f:section>
+<f:section name="navigation-rulesets"></f:section>
+<f:section name="navigation-mongodb">active</f:section>
+
+<f:section name="Content">
+    <f:section name="Title">MongoDB Connection</f:section>
+    <f:if condition="{hasConnectionData}">
+        <f:then>
+            <div class="row">
+                <div class="input-group form-group mb-3">
+                    <span class="input-group-text col-1">User</span>
+                    <f:form.textfield class="form-control" value="{connectionData.user}" disabled="disabled" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group form-group mb-3">
+                    <span class="input-group-text col-1">Server</span>
+                    <f:form.textfield class="form-control" value="{connectionData.server}" disabled="disabled" />
+                </div>
+            </div>
+            <f:form action="index">
+                <f:if condition="{databaseNames}">
+                    <div class="row">
+                        <div class="input-group form-group mb-3">
+                            <span class="input-group-text col-1">Database</span>
+                            <f:form.select id="databasename" name="databasename" options="{databaseNames}" value="{databaseName}" class="form-control" prependOptionLabel="Ruleset auswählen..." prependOptionValue="" />
+                        </div>
+                    </div>
+                </f:if>
+                <div class="row">
+                    <div class="mb-3">
+                        <f:form.submit value="CHOOSE DATABASE" class="btn btn-primary" />
+                        <f:link.action action="close" class="btn btn-danger">CLOSE CONNECTION</f:link.action>
+                    </div>
+                </div>
+            </f:form>
+        </f:then>
+        <f:else>
+            <f:form action="index">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-1">User</span>
+                        <f:form.textfield name="user" class="form-control" id="user" placeholder="MongoDB User" required="true" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-1">Password</span>
+                        <f:form.password name="password" class="form-control" id="password" placeholder="Password" required="true" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-1">Server</span>
+                        <f:form.textfield name="server" class="form-control" id="server" placeholder="MongoDB Server" required="true" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3">
+                        <f:form.submit value="CONNECT" class="btn btn-outline-secondary" />
+                    </div>
+                </div>
+            </f:form>
+        </f:else>
+    </f:if>
+</f:section>
