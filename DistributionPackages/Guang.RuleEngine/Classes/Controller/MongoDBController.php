@@ -44,14 +44,18 @@ class MongoDBController extends ActionController
         }
 
         if ($this->mongodbService->hasConnectionData()) {
-            $this->view->assign('databaseNames', $this->mongodbService->getDatabaseNames());
-            if ($this->mongodbService->hasDatabaseChoosen()) {
-                $this->view->assign('databaseName', $this->mongodbService->getdatabaseName());
+            $message = $this->mongodbService->testConnection();
+            if (strlen($message) > 0) {
+                $this->view->assign('message', $message);
+            } else {
+                $this->view->assign('databaseNames', $this->mongodbService->getDatabaseNames());
+                if ($this->mongodbService->hasDatabaseChoosen()) {
+                    $this->view->assign('databaseName', $this->mongodbService->getdatabaseName());
+                }
+                $this->view->assign('hasConnectionData', $this->mongodbService->hasConnectionData());
+                $this->view->assign('connectionData', $this->mongodbService->getConnectionData());
             }
         }
-
-        $this->view->assign('hasConnectionData', $this->mongodbService->hasConnectionData());
-        $this->view->assign('connectionData', $this->mongodbService->getConnectionData());
     }
 
     public function closeAction()

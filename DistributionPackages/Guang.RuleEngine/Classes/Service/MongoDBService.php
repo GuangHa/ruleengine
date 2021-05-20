@@ -3,8 +3,7 @@ namespace Guang\RuleEngine\Service;
 
 use MongoClient;
 use MongoDB\Client;
-use MongoDB\Driver\Manager;
-use MongoDB\Model\BSONDocument;
+use MongoDB\Driver\Exception\Exception;
 use Neos\Flow\Annotations as Flow;
 use function MongoDB\BSON\fromPHP;
 use function MongoDB\BSON\toJSON;
@@ -112,6 +111,18 @@ class MongoDBService {
             return new Client('mongodb+srv://'.$_COOKIE['mongodbuser'].':'.$_COOKIE['mongodbpassword'].'@'.$_COOKIE['mongodbserver']);
         }
         return null;
+    }
+
+    public function testConnection()
+    {
+        try {
+            $client = $this->getClient();
+            $db = $client->listDatabases();
+        } catch (Exception $e) {
+            $this->closeConnection();
+            return $e->getMessage();
+        }
+        return '';
     }
 
 }
