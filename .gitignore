@@ -7,3 +7,9 @@
 /Upgrading.rst
 /flow
 /flow.bat
+/DistributionPackages/Guang.RuleEngine/Tests/Unit/Rules/useCaseWithAllocation.json
+/DistributionPackages/Guang.RuleEngine/Tests/Unit/Rules/useCaseRecursive.json
+/DistributionPackages/Guang.RuleEngine/Tests/Unit/Data/useCaseRecursive.json
+/DistributionPackages/Guang.RuleEngine/Tests/Unit/Data/useCaseWithAllocation.json
+/DistributionPackages/Guang.RuleEngine/Tests/Unit/Data/simpleUseCase.json
+/DistributionPackages/Guang.RuleEngine/Tests/Unit/Rules/simpleUseCase.json
